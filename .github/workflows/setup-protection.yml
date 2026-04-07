@@ -3,17 +3,22 @@ name: Setup Branch Protection
 on:
   workflow_dispatch:
 
-permissions:
-  administration: write
+# Branch protection requires a token with 'repo' admin scope.
+# Store a Personal Access Token (classic) with full 'repo' scope
+# as a repository secret named ADMIN_PAT.
+# See: https://github.com/settings/tokens
 
 jobs:
   protect:
     name: Configure branch protection rules
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - name: Protect main
+      - name: Apply branch protection rules
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.ADMIN_PAT }}
           script: |
             const common = {
               owner: context.repo.owner,
