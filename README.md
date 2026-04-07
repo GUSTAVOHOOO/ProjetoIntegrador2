@@ -13,6 +13,6 @@ As branches `main` e `develop` são protegidas. Todo código deve entrar via Pul
 
 Fluxo de trabalho:
 ```
-feature/x  →  develop  →  mainaaa
+feature/x  →  develop  →  main
               (PR + CI)   (PR + CI)
 ```
