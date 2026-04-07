@@ -17,7 +17,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: if [ -f package.json ]; then npm install && npx turbo typecheck; else echo "No package.json found — skipping typecheck"; fi
+          cache: npm
+      - run: npm ci
+      - run: npx turbo typecheck
 
   lint:
     name: Lint
@@ -29,7 +31,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: if [ -f package.json ]; then npm install && npx turbo lint; else echo "No package.json found — skipping lint"; fi
+          cache: npm
+      - run: npm ci
+      - run: npx turbo lint
 
   test:
     name: Tests
@@ -41,4 +45,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: if [ -f package.json ]; then npm install && npx turbo test; else echo "No package.json found — skipping tests"; fi
+          cache: npm
+      - run: npm ci
+      - run: npx turbo test
